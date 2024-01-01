@@ -1,31 +1,33 @@
 import './App.css'
-import React, {useRef} from 'react'
+import {useRef} from 'react'
 function App() {
     const fileInputRef = useRef(null);
 
     const handleSubmit = async() => {
-        const selectedFile = fileInputRef.current.files[0];
-        if (!selectedFile) {
-            console.log("ya doofus it doesn't do it like that");
-            return;
-        }
-
-        const formData = new FormData();
-        formData.append('file', selectedFile);
-
-        try {
-            const response = await fetch("https://secretsantahttp.fly.dev/upload", {
-                method: "POST",
-                body: formData,
-            });
-            
-            if (response.ok) {
-                console.log("things work");
-            } else {
-                console.error("failed");
+        if (fileInputRef.current != null) {
+            const selectedFile = fileInputRef.current['files'][0];
+            if (!selectedFile) {
+                console.log("ya doofus it doesn't do it like that");
+                return;
             }
-        } catch (error) {
-            console.error("error occurred: ", error);
+
+            const formData = new FormData();
+            formData.append('file', selectedFile);
+
+            try {
+                const response = await fetch("https://secretsantahttp.fly.dev/upload", {
+                    method: "POST",
+                    body: formData,
+                });
+                
+                if (response.ok) {
+                    console.log("things work");
+                } else {
+                    console.error("failed");
+                }
+            } catch (error) {
+                console.error("error occurred: ", error);
+            }
         }
     }
     
