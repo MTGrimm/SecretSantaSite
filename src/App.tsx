@@ -15,7 +15,8 @@ function App() {
             formData.append('file', selectedFile);
 
             try {
-                const response = await fetch("https://secretsantahttp.fly.dev/upload", {
+                const response = await fetch("https://secretsantahttp-final2.fly.dev/upload", {
+				//const response = await fetch("http://localhost:8080/upload", {
                     method: "POST",
                     body: formData,
                 });
